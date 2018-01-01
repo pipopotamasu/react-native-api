@@ -6,20 +6,33 @@
 
 import React, { Component } from 'react';
 import {
-  Platform,
   StyleSheet,
   Text,
   View
 } from 'react-native';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import axios from 'axios'
 
 export default class App extends Component<{}> {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      reddits: null,
+    };
+  }
+
+  componentDidMount() {
+    const self = this;
+    // Get reddits
+    axios.get(`https://www.reddit.com/r/vue.json`).then((response) => {
+      self.setState({
+        reddits: response.data.data.children
+      });
+    }).catch((e) => {
+      console.log(e)
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -30,7 +43,7 @@ export default class App extends Component<{}> {
           To get started, edit App.js
         </Text>
         <Text style={styles.instructions}>
-          {instructions}
+          Apps
         </Text>
       </View>
     );
