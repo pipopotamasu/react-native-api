@@ -11,6 +11,7 @@ import {
   Text,
   View
 } from 'react-native';
+import Reddit from './components/Reddit'
 import axios from 'axios'
 
 export default class App extends Component<{}> {
@@ -46,7 +47,9 @@ export default class App extends Component<{}> {
           style={styles.todoList}
           data={reddits}
           renderItem={({ item, index }) => (
-            <Text>{item.data.title}</Text>
+            <Reddit
+              reddit={item.data}
+            />
           )}
         />
       </View>
