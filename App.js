@@ -6,32 +6,57 @@
 
 import React, { Component } from 'react';
 import {
-  Platform,
   StyleSheet,
+  FlatList,
   Text,
   View
 } from 'react-native';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import Reddit from './components/Reddit'
+import axios from 'axios'
 
 export default class App extends Component<{}> {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      reddits: null,
+    };
+  }
+
+  componentDidMount() {
+    const self = this;
+    // Get reddits
+    axios.get(`https://www.reddit.com/r/vue.json`).then((response) => {
+      self.setState({
+        reddits: response.data.data.children
+      });
+      console.log(this.state.reddits)
+    }).catch((e) => {
+      console.log(e)
+    });
+  }
+
   render() {
+    const {
+      reddits,
+    } = this.state;
+
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        <View style={styles.title}>
+          <Text style={styles.titleText}>Reddit</Text>
+        </View>
+        <View style={styles.redditBox}>
+          <FlatList
+            style={styles.redditList}
+            data={reddits}
+            renderItem={({ item, index }) => (
+              <Reddit
+                reddit={item.data}
+              />
+            )}
+          />
+        </View>
       </View>
     );
   }
@@ -40,18 +65,24 @@ export default class App extends Component<{}> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#333',
   },
-  welcome: {
+  title: {
+    paddingTop: 30,
+    paddingBottom: 5
+  },
+  titleText: {
     fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    color: 'white'
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  redditBox: {
+    justifyContent: 'center',
+    flexDirection: 'row',
   },
+  redditList: {
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+  }
 });
