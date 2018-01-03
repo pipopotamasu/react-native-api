@@ -30,7 +30,6 @@ export default class RedditTab extends Component<{}> {
       self.setState({
         reddits: response.data.data.children
       });
-      console.log(this.state.reddits)
     }).catch((e) => {
       console.log(e)
     });
