@@ -1,51 +1,21 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+import React from 'react';
+import { View, Text } from 'react-native';
+import { TabNavigator } from 'react-navigation';
+import RedditTab from './components/RedditTab'
 
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  FlatList,
-  Text,
-  View
-} from 'react-native';
-import RootTab from './components/RootTab'
+const HomeScreen = () => (
+  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <Text>Home Screen</Text>
+  </View>
+);
 
-export default class App extends Component<{}> {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <RootTab />
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#333',
+const RootTabs = TabNavigator({
+  Home: {
+    screen: HomeScreen,
   },
-  title: {
-    paddingTop: 30,
-    paddingBottom: 5
+  Reddit: {
+    screen: RedditTab,
   },
-  titleText: {
-    fontSize: 20,
-    color: 'white'
-  },
-  redditBox: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  redditList: {
-    paddingTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-  }
 });
+
+export default RootTabs;
