@@ -12,6 +12,7 @@ import {
   View
 } from 'react-native';
 import Reddit from './components/Reddit'
+import RootTab from './components/RootTab'
 import axios from 'axios'
 
 export default class App extends Component<{}> {
