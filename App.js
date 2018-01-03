@@ -30,7 +30,10 @@ const RootTabs = TabNavigator(
       activeTintColor: '#ffffff',
       style: {
         backgroundColor: '#800000',
-      }
+      },
+      labelStyle: {
+        fontSize: 14,
+      },
     }
   },
 );
