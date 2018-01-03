@@ -4,8 +4,8 @@ import { TabNavigator } from 'react-navigation';
 import RedditTab from './components/RedditTab'
 
 const HomeScreen = () => (
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text>Home Screen</Text>
+  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#333' }}>
+    <Text style={{ color: 'white' }}>Home Screen</Text>
   </View>
 );
 
