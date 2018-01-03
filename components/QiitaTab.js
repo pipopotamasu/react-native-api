@@ -11,24 +11,24 @@ import {
   Text,
   View
 } from 'react-native';
-import Reddit from './Reddit'
 import axios from 'axios'
+import QiitaPost from './QiitaPost'
 
-export default class RedditTab extends Component<{}> {
+export default class QiitaTab extends Component<{}> {
   constructor(props) {
     super(props);
 
     this.state = {
-      reddits: null,
+      posts: null,
     };
   }
 
   componentDidMount() {
     const self = this;
-    // Get reddits
-    axios.get(`https://www.reddit.com/r/vue.json`).then((response) => {
+    // Get qiita posts
+    axios.get(`https://qiita.com/api/v2/items`).then((response) => {
       self.setState({
-        reddits: response.data.data.children
+        posts: response.data
       });
     }).catch((e) => {
       console.log(e)
@@ -37,21 +37,21 @@ export default class RedditTab extends Component<{}> {
 
   render() {
     const {
-      reddits,
+      posts,
     } = this.state;
 
     return (
       <View style={styles.container}>
         <View style={styles.title}>
-          <Text style={styles.titleText}>Reddit</Text>
+          <Text style={styles.titleText}>Qiita</Text>
         </View>
         <View style={styles.redditBox}>
           <FlatList
             style={styles.redditList}
-            data={reddits}
+            data={posts}
             renderItem={({ item, index }) => (
-              <Reddit
-                reddit={item.data}
+              <QiitaPost
+                post={item}
               />
             )}
           />

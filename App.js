@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import RedditTab from './components/RedditTab'
+import QiitaTab from './components/QiitaTab'
 
 const HomeScreen = () => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#333' }}>
@@ -17,6 +18,9 @@ const RootTabs = TabNavigator(
     Reddit: {
       screen: RedditTab,
     },
+    Qiita: {
+      screen: QiitaTab,
+    },
   },
   {
     tabBarPosition: 'top',
@@ -26,7 +30,10 @@ const RootTabs = TabNavigator(
       activeTintColor: '#ffffff',
       style: {
         backgroundColor: '#800000',
-      }
+      },
+      labelStyle: {
+        fontSize: 14,
+      },
     }
   },
 );
