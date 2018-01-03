@@ -11,54 +11,16 @@ import {
   Text,
   View
 } from 'react-native';
-import Reddit from './components/Reddit'
 import RootTab from './components/RootTab'
-import axios from 'axios'
 
 export default class App extends Component<{}> {
   constructor(props) {
     super(props);
-
-    this.state = {
-      reddits: null,
-    };
-  }
-
-  componentDidMount() {
-    const self = this;
-    // Get reddits
-    axios.get(`https://www.reddit.com/r/vue.json`).then((response) => {
-      self.setState({
-        reddits: response.data.data.children
-      });
-      console.log(this.state.reddits)
-    }).catch((e) => {
-      console.log(e)
-    });
   }
 
   render() {
-    const {
-      reddits,
-    } = this.state;
-
     return (
-      <View style={styles.container}>
-        <View style={styles.title}>
-          <Text style={styles.titleText}>Reddit</Text>
-        </View>
-        <View style={styles.redditBox}>
-          <FlatList
-            style={styles.redditList}
-            data={reddits}
-            renderItem={({ item, index }) => (
-              <Reddit
-                reddit={item.data}
-              />
-            )}
-          />
-        </View>
-      </View>
+      <RootTab />
     );
   }
 }
