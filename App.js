@@ -25,7 +25,7 @@ const RootTabs = TabNavigator(
     tabBarOptions: {
       activeTintColor: '#ffffff',
       style: {
-        backgroundColor: '#009688',
+        backgroundColor: '#800000',
       }
     }
   },
