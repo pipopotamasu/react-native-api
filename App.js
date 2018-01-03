@@ -1,88 +1,34 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+import React from 'react';
+import { View, Text } from 'react-native';
+import { TabNavigator } from 'react-navigation';
+import RedditTab from './components/RedditTab'
 
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  FlatList,
-  Text,
-  View
-} from 'react-native';
-import Reddit from './components/Reddit'
-import axios from 'axios'
+const HomeScreen = () => (
+  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#333' }}>
+    <Text style={{ color: 'white' }}>Home Screen</Text>
+  </View>
+);
 
-export default class App extends Component<{}> {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      reddits: null,
-    };
-  }
-
-  componentDidMount() {
-    const self = this;
-    // Get reddits
-    axios.get(`https://www.reddit.com/r/vue.json`).then((response) => {
-      self.setState({
-        reddits: response.data.data.children
-      });
-      console.log(this.state.reddits)
-    }).catch((e) => {
-      console.log(e)
-    });
-  }
-
-  render() {
-    const {
-      reddits,
-    } = this.state;
-
-    return (
-      <View style={styles.container}>
-        <View style={styles.title}>
-          <Text style={styles.titleText}>Reddit</Text>
-        </View>
-        <View style={styles.redditBox}>
-          <FlatList
-            style={styles.redditList}
-            data={reddits}
-            renderItem={({ item, index }) => (
-              <Reddit
-                reddit={item.data}
-              />
-            )}
-          />
-        </View>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#333',
+const RootTabs = TabNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+    },
+    Reddit: {
+      screen: RedditTab,
+    },
   },
-  title: {
-    paddingTop: 30,
-    paddingBottom: 5
+  {
+    tabBarPosition: 'top',
+    animationEnabled: true,
+    showIcon: 'true',
+    tabBarOptions: {
+      activeTintColor: '#ffffff',
+      style: {
+        backgroundColor: '#009688',
+      }
+    }
   },
-  titleText: {
-    fontSize: 20,
-    color: 'white'
-  },
-  redditBox: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  redditList: {
-    paddingTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-  }
-});
+);
+
+export default RootTabs;

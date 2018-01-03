@@ -11,3 +11,5 @@ This is the React Native App getting some data via api.
 * React Native
 
 * axios
+
+* React Navigation
