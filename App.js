@@ -9,13 +9,26 @@ const HomeScreen = () => (
   </View>
 );
 
-const RootTabs = TabNavigator({
-  Home: {
-    screen: HomeScreen,
+const RootTabs = TabNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+    },
+    Reddit: {
+      screen: RedditTab,
+    },
   },
-  Reddit: {
-    screen: RedditTab,
+  {
+    tabBarPosition: 'top',
+    animationEnabled: true,
+    showIcon: 'true',
+    tabBarOptions: {
+      activeTintColor: '#ffffff',
+      style: {
+        backgroundColor: '#009688',
+      }
+    }
   },
-});
+);
 
 export default RootTabs;
