@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import RedditTab from './components/RedditTab'
-import Qiita from './components/Qiita'
+import QiitaTab from './components/QiitaTab'
 
 const HomeScreen = () => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#333' }}>
@@ -19,7 +19,7 @@ const RootTabs = TabNavigator(
       screen: RedditTab,
     },
     Qiita: {
-      screen: Qiita,
+      screen: QiitaTab,
     },
   },
   {
