@@ -12,6 +12,7 @@ import {
   View
 } from 'react-native';
 import Reddit from './Reddit'
+import RedditInput from './RedditInput';
 import axios from 'axios'
 
 export default class RedditTab extends Component<{}> {
@@ -45,6 +46,7 @@ export default class RedditTab extends Component<{}> {
         <View style={styles.title}>
           <Text style={styles.titleText}>Reddit</Text>
         </View>
+        <RedditInput />
         <View style={styles.redditBox}>
           <FlatList
             style={styles.redditList}
