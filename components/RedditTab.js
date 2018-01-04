@@ -12,6 +12,7 @@ import {
   View
 } from 'react-native';
 import Reddit from './Reddit'
+import RedditInput from './RedditInput';
 import axios from 'axios'
 
 export default class RedditTab extends Component<{}> {
@@ -23,10 +24,18 @@ export default class RedditTab extends Component<{}> {
     };
   }
 
+  _onPress = (text) => {
+    this.getReddit(text)
+  }
+
   componentDidMount() {
+    this.getReddit('vue');
+  }
+
+  getReddit(text) {
     const self = this;
     // Get reddits
-    axios.get(`https://www.reddit.com/r/vue.json`).then((response) => {
+    axios.get(`https://www.reddit.com/r/${text}.json`).then((response) => {
       self.setState({
         reddits: response.data.data.children
       });
@@ -45,6 +54,7 @@ export default class RedditTab extends Component<{}> {
         <View style={styles.title}>
           <Text style={styles.titleText}>Reddit</Text>
         </View>
+        <RedditInput onPress={this._onPress} />
         <View style={styles.redditBox}>
           <FlatList
             style={styles.redditList}
