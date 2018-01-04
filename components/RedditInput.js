@@ -44,15 +44,22 @@ export default class RedditInput extends Component {
     };
   }
 
+  _onPress = () => {
+    this.props.onPress(this.state.text);
+  }
+
+
   render() {
     return (
       <View style={styles.container}>
         <TextInput
           style={styles.textInput}
           value={this.state.text}
+          onChangeText={(text) => this.setState({text})}
         />
         <TouchableOpacity
           style={styles.button}
+          onPress={this._onPress}
         >
           <Text style={styles.buttonText}>Search</Text>
         </TouchableOpacity>
